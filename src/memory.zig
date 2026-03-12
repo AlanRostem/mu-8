@@ -1,11 +1,9 @@
 const MAX_MEMORY_SIZE: i32 = 4096;
 
-const Memory = struct {
-    data: u8[MAX_MEMORY_SIZE],
+pub const Memory = struct {
+    data: [MAX_MEMORY_SIZE]u8,
     pub fn new() Memory {
-        const self: Memory = .{};
-        @memset(self.data, 0);
-        return self;
+        return .{ .data = .{0} ** MAX_MEMORY_SIZE };
     }
 
     pub fn write(self: *Memory, address: u12, data: u8) void {
