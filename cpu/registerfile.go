@@ -2,10 +2,10 @@ package cpu
 
 import "github.com/AlanRostem/mu-8/mu8"
 
-const GeneralPurposeRegisterCount = 0x10
+const generalPurposeRegisterCount = 0x10
 
 type RegisterFile struct {
-	GeneralPurpose [GeneralPurposeRegisterCount]mu8.Byte
+	GeneralPurpose [generalPurposeRegisterCount]mu8.Byte
 	Index          mu8.DByte
 	ProgramCounter mu8.DByte
 	StackPointer   mu8.DByte
@@ -16,6 +16,6 @@ type RegisterFile struct {
 
 func NewRegisterFile() *RegisterFile {
 	return &RegisterFile{
-		GeneralPurpose: [GeneralPurposeRegisterCount]mu8.Byte{},
+		GeneralPurpose: [generalPurposeRegisterCount]mu8.Byte{},
 	}
 }
