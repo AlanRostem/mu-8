@@ -1,12 +1,12 @@
 package instruction
 
-import "github.com/AlanRostem/mu-8/mnemonic"
+import "github.com/AlanRostem/mu-8/decode"
 
-var MapCategory6 = NewSingularInstructionMap(ldVxByte)
-var MapCategoryA = NewSingularInstructionMap(ldIAddr)
+var MapClass6 = NewSingularInstructionMap(ldVxByte)
+var MapClassA = NewSingularInstructionMap(ldIAddr)
 
-// TableAll contains instruction maps mapped to a category number.
-var TableAll = map[mnemonic.Category]InstructionMap{
-	mnemonic.Category6: MapCategory6,
-	mnemonic.CategoryA: MapCategoryA,
+// TableAll contains instruction maps mapped to a class number.
+var TableAll = map[decode.Class]InstructionMap{
+	decode.Class6: MapClass6,
+	decode.ClassA: MapClassA,
 }

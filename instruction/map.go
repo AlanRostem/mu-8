@@ -19,16 +19,16 @@ func (im InstructionMap) IsSingle() bool {
 
 func (im InstructionMap) Single() Instruction {
 	if !im.IsSingle() {
-		panic("cannot get subcategorized instruction when map is singluar")
+		panic("cannot get categorized instruction when map is singluar")
 	}
 	return im[singleInstKey]
 }
 
-func (im InstructionMap) Get(subcat uint8) Instruction {
+func (im InstructionMap) Get(cat uint8) Instruction {
 	if im.IsSingle() {
 		panic("cannot get multiple instructions for singular map")
 	}
-	return im[subcat]
+	return im[cat]
 }
 
 func (im InstructionMap) Add(subcat uint8, inst Instruction) {
