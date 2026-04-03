@@ -11,5 +11,6 @@ func Run() {
 	exec.Exec(0xE2A1)
 	exec.Exec(0xE59E)
 	w := NewWindow()
+	w.SetPixel(5, 10, true)
 	w.Run()
 }
