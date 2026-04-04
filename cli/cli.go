@@ -11,7 +11,7 @@ func Run() {
 	exec := instruction.NewExecutor(sys)
 	exec.Exec(0xE2A1)
 	exec.Exec(0xE59E)
-	w := display.NewWindow()
-	w.SetPixel(5, 10, true)
+	w := display.NewWindow(sys)
+	sys.FrameBuffer[5][10] = true
 	w.Run()
 }

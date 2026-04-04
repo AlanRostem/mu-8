@@ -4,19 +4,16 @@ import (
 	"image/color"
 	"log"
 
+	"github.com/AlanRostem/mu-8/system"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type Window struct {
-	pixels [32][64]bool
+	system *system.System
 }
 
-func NewWindow() *Window {
-	return &Window{}
-}
-
-func (w *Window) SetPixel(x, y uint8, white bool) {
-	w.pixels[y][x] = white
+func NewWindow(system *system.System) *Window {
+	return &Window{system: system}
 }
 
 func (w *Window) Run() {
@@ -36,7 +33,7 @@ func (w *Window) Draw(screen *ebiten.Image) {
 	for y := range 32 {
 		for x := range 64 {
 			c := color.Black
-			if w.pixels[y][x] {
+			if w.system.FrameBuffer[y][x] {
 				c = color.White
 			}
 			screen.Set(x, y, c)
