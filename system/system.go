@@ -2,14 +2,14 @@ package system
 
 type System struct {
 	Registers   *RegisterFile
-	Memmory     *MemoryBank
+	Memory      *MemoryBank
 	FrameBuffer [32][64]bool
 }
 
 func New() *System {
 	return &System{
 		Registers:   newRegisterFile(),
-		Memmory:     newMemoryBank(),
+		Memory:      newMemoryBank(),
 		FrameBuffer: [32][64]bool{},
 	}
 }
