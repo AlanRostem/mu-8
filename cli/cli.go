@@ -18,11 +18,11 @@ var sprite = []mu8.Byte{
 func Run() {
 	sys := system.New()
 	exec := instruction.NewExecutor(sys)
-	sys.Registers.Index = 0
+	sys.Registers.Index = 100
 	sys.Registers.GeneralPurpose[0x0] = 16
 	sys.Registers.GeneralPurpose[0x1] = 8
 	for i, row := range sprite {
-		addr := mu8.NewUint12(uint(i))
+		addr := mu8.NewUint12(uint(i + sys.Registers.Index.Int()))
 		sys.Memory.Write(addr, row)
 	}
 	exec.Exec(0xD015)
