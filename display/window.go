@@ -17,7 +17,7 @@ func NewWindow(system *system.System) *Window {
 }
 
 func (w *Window) Run() {
-	ebiten.SetWindowSize(640, 320)
+	ebiten.SetWindowSize(system.DisplayWidth*10, system.DisplayHeight*10)
 	ebiten.SetWindowTitle("MU-8")
 	if err := ebiten.RunGame(w); err != nil {
 		log.Fatal(err)
@@ -30,8 +30,8 @@ func (w *Window) Update() error {
 
 func (w *Window) Draw(screen *ebiten.Image) {
 	screen.Fill(color.Black)
-	for y := range 32 {
-		for x := range 64 {
+	for y := range system.DisplayHeight {
+		for x := range system.DisplayWidth {
 			c := color.Black
 			if w.system.FrameBuffer[y][x] {
 				c = color.White
@@ -42,5 +42,5 @@ func (w *Window) Draw(screen *ebiten.Image) {
 }
 
 func (w *Window) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 64, 32
+	return system.DisplayWidth, system.DisplayHeight
 }

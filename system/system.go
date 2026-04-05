@@ -1,15 +1,20 @@
 package system
 
+const (
+	DisplayWidth  = 64
+	DisplayHeight = 32
+)
+
 type System struct {
 	Registers   *RegisterFile
 	Memory      *MemoryBank
-	FrameBuffer [32][64]bool
+	FrameBuffer [DisplayHeight][DisplayWidth]bool
 }
 
 func New() *System {
 	return &System{
 		Registers:   newRegisterFile(),
 		Memory:      newMemoryBank(),
-		FrameBuffer: [32][64]bool{},
+		FrameBuffer: [DisplayHeight][DisplayWidth]bool{},
 	}
 }
