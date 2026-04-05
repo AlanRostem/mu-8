@@ -14,14 +14,14 @@ func DrwVxVyN(args []mu8.DByte, sys *system.System) {
 	y := args[1]
 	n := args[2]
 	start := sys.Registers.Index
-	j := mu8.DByte(0)
+	j := mu8.Byte(0)
 	for i := start; i < start+n; i++ {
 		addr := mu8.NewUint12(uint(i))
 		rowByte := sys.Memory.Read(addr)
 		row := rowByte.BoolArray()
 		for k := range row {
-			cx := x + mu8.DByte(k)
-			cy := y + j
+			cx := sys.Registers.GeneralPurpose[x] + mu8.Byte(k)
+			cy := sys.Registers.GeneralPurpose[y] + j
 			current := sys.FrameBuffer[cy][cx]
 			newVal := boolXor(current, row[k])
 			sys.FrameBuffer[cy][cx] = newVal
