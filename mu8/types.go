@@ -3,8 +3,20 @@ package mu8
 // Byte is an alias for uint8
 type Byte uint8
 
+func (b Byte) BoolArray() [8]bool {
+	res := [8]bool{}
+	for i := range Byte(8) {
+		res[i] = (b & (1 << (7 - i))) != 0
+	}
+	return res
+}
+
 // DByte is short for "double-byte"
 type DByte uint16
+
+func (db DByte) Int() int {
+	return int(db)
+}
 
 func (db *DByte) AppendNibble(nib uint8) {
 	if nib > 0x10 {
