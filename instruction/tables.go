@@ -6,12 +6,14 @@ import (
 )
 
 var tableClass0 = newInstructionTable()
+var tableClass1 = newSingularInstructionTable(impl.Jp)
 var tableClass6 = newSingularInstructionTable(impl.LdVxByte)
 var tableClass8 = newInstructionTable()
 var tableClassA = newSingularInstructionTable(impl.LdIAddr)
 
 var tableClassD = newSingularInstructionTable(impl.DrwVxVyN)
 var tableClassE = newInstructionTable()
+var tableClassF = newInstructionTable()
 
 func init() {
 	tableClass0.Add(0x000, impl.Sys)
@@ -21,14 +23,18 @@ func init() {
 
 	tableClassE.Add(0x9E, impl.SkpVx)
 	tableClassE.Add(0xA1, impl.SknpVx)
+
+	tableClassF.Add(0x07, impl.LdVxDt)
 }
 
 // tableAll contains instruction maps mapped to a class number.
 var tableAll = map[decode.Class]instructionTable{
 	decode.Class0: tableClass0,
+	decode.Class1: tableClass1,
 	decode.Class6: tableClass6,
 	decode.Class8: tableClass8,
 	decode.ClassA: tableClassA,
-	decode.ClassE: tableClassE,
 	decode.ClassD: tableClassD,
+	decode.ClassE: tableClassE,
+	decode.ClassF: tableClassF,
 }

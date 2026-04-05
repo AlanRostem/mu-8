@@ -15,6 +15,13 @@ func LdVxVy(args []mu8.DByte, sys *system.System) {
 	fmt.Printf("LD V%X, V%X\n", x, y)
 }
 
+// LdVxByte executes opcode "8xy0", aka "LD Vx, Vy"
+func LdVxDt(args []mu8.DByte, sys *system.System) {
+	x := args[0]
+	sys.Registers.GeneralPurpose[x] = sys.Registers.DelayTimer
+	fmt.Printf("LD V%X, DT\n", x)
+}
+
 // LdVxByte executes opcode "6xkk", aka "LD Vx, byte"
 func LdVxByte(args []mu8.DByte, sys *system.System) {
 	x := args[0]
