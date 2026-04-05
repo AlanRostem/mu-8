@@ -5,8 +5,12 @@ import (
 	"github.com/AlanRostem/mu-8/system"
 )
 
-func boolXor(a, b bool) bool {
-	return a != b
+func Cls(args []mu8.DByte, sys *system.System) {
+	for y := range system.DisplayHeight {
+		for x := range system.DisplayWidth {
+			sys.FrameBuffer[y][x] = false
+		}
+	}
 }
 
 func DrwVxVyN(args []mu8.DByte, sys *system.System) {
@@ -23,7 +27,7 @@ func DrwVxVyN(args []mu8.DByte, sys *system.System) {
 			cx := sys.Registers.GeneralPurpose[x] + mu8.Byte(k)
 			cy := sys.Registers.GeneralPurpose[y] + j
 			current := sys.FrameBuffer[cy][cx]
-			newVal := boolXor(current, row[k])
+			newVal := mu8.BoolXor(current, row[k])
 			sys.FrameBuffer[cy][cx] = newVal
 		}
 		j++

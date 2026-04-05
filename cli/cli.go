@@ -26,6 +26,7 @@ func Run() {
 		sys.Memory.Write(addr, row)
 	}
 	exec.Exec(0xD015)
+	exec.Exec(0x00E0) // clear screen test
 	w := display.NewWindow(sys)
 	w.Run()
 }
