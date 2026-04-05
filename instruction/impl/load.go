@@ -7,7 +7,15 @@ import (
 	"github.com/AlanRostem/mu-8/system"
 )
 
-// ldVxByte executes opcode "6xkk", aka "LD Vx, byte"
+// LdVxByte executes opcode "8xy0", aka "LD Vx, Vy"
+func LdVxVy(args []mu8.DByte, sys *system.System) {
+	x := args[0]
+	y := args[1]
+	sys.Registers.GeneralPurpose[x] = sys.Registers.GeneralPurpose[y]
+	fmt.Printf("LD V%X, V%X\n", x, y)
+}
+
+// LdVxByte executes opcode "6xkk", aka "LD Vx, byte"
 func LdVxByte(args []mu8.DByte, sys *system.System) {
 	x := args[0]
 	kk := args[1]
@@ -15,7 +23,7 @@ func LdVxByte(args []mu8.DByte, sys *system.System) {
 	fmt.Printf("LD V%X, 0x%02X\n", x, kk)
 }
 
-// ldIAddr executes opcode "Annn", aka "LD I, addr"
+// LdIAddr executes opcode "Annn", aka "LD I, addr"
 func LdIAddr(args []mu8.DByte, sys *system.System) {
 	addr := args[0]
 	sys.Registers.Index = addr

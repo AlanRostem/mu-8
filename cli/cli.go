@@ -25,8 +25,8 @@ func Run() {
 		addr := mu8.NewUint12(uint(i + sys.Registers.Index.Int()))
 		sys.Memory.Write(addr, row)
 	}
+	exec.Exec(0x8170)
 	exec.Exec(0xD015)
-	exec.Exec(0x00E0) // clear screen test
 	w := display.NewWindow(sys)
 	w.Run()
 }
