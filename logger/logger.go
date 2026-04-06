@@ -31,7 +31,7 @@ func logPrintf(levelLabel, levelColor, format string, args ...any) {
 		return
 	}
 	ts := time.Now().Format(time.RFC3339)
-	fmt.Fprintf(logFile, "%s\t%s%s%s\t", ts, levelColor, levelLabel, colorReset)
+	fmt.Fprintf(logFile, "%s %s[%s]%s\t", ts, levelColor, levelLabel, colorReset)
 	fmt.Fprintf(logFile, format+"\n", args...)
 }
 
