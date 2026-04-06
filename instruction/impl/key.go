@@ -7,12 +7,12 @@ import (
 
 func SkpVx(args []mu8.DByte, sys *system.System) {
 	x := args[0]
-	// TODO implement
 	pcDebugf(sys.Registers.ProgramCounter, "SKP V%X", x)
+	// TODO implement
 }
 
 func SknpVx(args []mu8.DByte, sys *system.System) {
 	x := args[0]
-	// TODO implement
 	pcDebugf(sys.Registers.ProgramCounter, "SKNP V%X", x)
+	// TODO implement
 }

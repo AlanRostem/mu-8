@@ -31,6 +31,6 @@ func LdVxByte(args []mu8.DByte, sys *system.System) {
 // LdIAddr executes opcode "Annn", aka "LD I, addr"
 func LdIAddr(args []mu8.DByte, sys *system.System) {
 	addr := args[0]
-	sys.Registers.Index = addr
 	pcDebugf(sys.Registers.ProgramCounter, "LD I, 0x%03X", addr)
+	sys.Registers.Index = addr
 }

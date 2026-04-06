@@ -9,6 +9,7 @@ var tableClass0 = newInstructionTable()
 var tableClass1 = newSingularInstructionTable(impl.Jp)
 var tableClass2 = newSingularInstructionTable(impl.Call)
 var tableClass3 = newSingularInstructionTable(impl.SeVxByte)
+var tableClass4 = newSingularInstructionTable(impl.SneVxByte)
 var tableClass6 = newSingularInstructionTable(impl.LdVxByte)
 var tableClass7 = newSingularInstructionTable(impl.AddVxByte)
 var tableClass8 = newInstructionTable()
@@ -36,6 +37,7 @@ var tableAll = map[decode.Class]instructionTable{
 	decode.Class1: tableClass1,
 	decode.Class2: tableClass2,
 	decode.Class3: tableClass3,
+	decode.Class4: tableClass4,
 	decode.Class6: tableClass6,
 	decode.Class7: tableClass7,
 	decode.Class8: tableClass8,

@@ -19,6 +19,7 @@ func NewWindow(system *system.System) *Window {
 func (w *Window) Run() {
 	ebiten.SetWindowSize(system.DisplayWidth*10, system.DisplayHeight*10)
 	ebiten.SetWindowTitle("MU-8")
+	ebiten.SetTPS(60)
 	if err := ebiten.RunGame(w); err != nil {
 		log.Fatal(err)
 	}
