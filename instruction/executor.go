@@ -52,10 +52,7 @@ func (e *Executor) LoadProgram(program [ProgramSize]mu8.Byte) {
 func (e *Executor) ExecProgram() {
 	for {
 		addr := mu8.NewUint12(e.System.Registers.ProgramCounter.Int())
-		left := e.System.Memory.Read(addr)
-		addr.Add(1)
-		right := e.System.Memory.Read(addr)
-		opcode := left.Concat(right)
+		opcode := e.System.Memory.FetchInstruction(addr)
 		// TODO remove after prod
 		if opcode == OpcodeExit {
 			break
@@ -63,6 +60,7 @@ func (e *Executor) ExecProgram() {
 		e.ExecOpcode(opcode)
 		// TODO verify if incrementing PC here is correct
 		e.System.Registers.ProgramCounter += 2
+		// simulate chip8 "clock speed"
 		time.Sleep(time.Second / CpuFrequency)
 	}
 }
