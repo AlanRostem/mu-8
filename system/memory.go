@@ -9,9 +9,12 @@ type MemoryBank struct {
 }
 
 func newMemoryBank() *MemoryBank {
-	return &MemoryBank{
+	m := &MemoryBank{
 		data: [MemorySize]mu8.Byte{},
 	}
+	// copy font data to memory
+	copy(m.data[:], fontData[:])
+	return m
 }
 
 func (m *MemoryBank) Write(addr mu8.Uint12, value mu8.Byte) {
