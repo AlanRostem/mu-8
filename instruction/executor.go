@@ -8,9 +8,7 @@ import (
 	"github.com/AlanRostem/mu-8/system"
 )
 
-const ProgramOffset = 0x200
-const ProgramSize = system.MemorySize - ProgramOffset
-const IndexOffset = 0x050
+const ProgramSize = system.MemorySize - system.ProgramOffset
 const CpuFrequency = 500
 
 // OpcodeExit is a special opcode used by the Executor to
@@ -42,24 +40,25 @@ func (e *Executor) ExecOpcode(opcode mu8.DByte) {
 
 func (e *Executor) LoadProgram(program [ProgramSize]mu8.Byte) {
 	for i, value := range program {
-		addr := mu8.NewUint12(ProgramOffset + i)
+		addr := mu8.NewUint12(system.ProgramOffset + i)
 		e.System.Memory.Write(addr, value)
 	}
-	e.System.Registers.ProgramCounter = ProgramOffset
-	e.System.Registers.Index = IndexOffset
+	e.System.Registers.Clear()
 }
 
 func (e *Executor) ExecProgram() {
 	for {
-		addr := mu8.NewUint12(e.System.Registers.ProgramCounter.Int())
+		addr := mu8.NewUint12(e.System.Registers.PC().Int())
 		opcode := e.System.Memory.FetchInstruction(addr)
 		// TODO remove after prod
 		if opcode == OpcodeExit {
 			break
 		}
 		e.ExecOpcode(opcode)
-		// TODO verify if incrementing PC here is correct
-		e.System.Registers.ProgramCounter += 2
+		// increments it by 2 every cpu cycle
+		// if the above opcode modifies PC, it will offset it by -2
+		// and this line will accomodate for that
+		e.System.Registers.IncrementPC()
 		// simulate chip8 "clock speed"
 		time.Sleep(time.Second / CpuFrequency)
 	}

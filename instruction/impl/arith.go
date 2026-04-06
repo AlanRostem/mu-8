@@ -9,6 +9,6 @@ import (
 func AddVxByte(args []mu8.DByte, sys *system.System) {
 	x := args[0]
 	kk := args[1]
-	pcDebugf(sys.Registers.ProgramCounter, "ADD V%01X, %d", x, kk)
-	sys.Registers.GeneralPurpose[x] += mu8.Byte(kk)
+	pcDebugf(sys.Registers.PC(), "ADD V%01X, %d", x, kk)
+	sys.Registers.V[x] += mu8.Byte(kk)
 }

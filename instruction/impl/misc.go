@@ -7,5 +7,5 @@ import (
 
 func Sys(args []mu8.DByte, sys *system.System) {
 	// it is intentional that this does nothing
-	pcDebugf(sys.Registers.ProgramCounter, "SYS %03X (not implemented)", args[0])
+	pcDebugf(sys.Registers.PC(), "SYS %03X (not implemented)", args[0])
 }
