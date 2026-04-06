@@ -3,6 +3,12 @@ package mu8
 // Byte is an alias for uint8
 type Byte uint8
 
+func (left Byte) Concat(right Byte) DByte {
+	full := DByte(left) << 8
+	full |= DByte(right)
+	return full
+}
+
 func (b Byte) BoolArray() [8]bool {
 	res := [8]bool{}
 	for i := range Byte(8) {

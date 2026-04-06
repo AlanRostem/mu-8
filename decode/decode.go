@@ -15,6 +15,8 @@ type Info struct {
 	SingleIdentity bool
 }
 
+// TODO set the 0x000 instructions identity to 0 instead of
+// making it a single identity
 func class0Decoded(instruction mu8.DByte) Info {
 	identity := instruction & 0xFFF
 	const CLS = mu8.DByte(0x0E0)
