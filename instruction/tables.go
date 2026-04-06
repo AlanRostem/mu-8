@@ -7,6 +7,7 @@ import (
 
 var tableClass0 = newInstructionTable()
 var tableClass1 = newSingularInstructionTable(impl.Jp)
+var tableClass2 = newSingularInstructionTable(impl.Call)
 var tableClass6 = newSingularInstructionTable(impl.LdVxByte)
 var tableClass8 = newInstructionTable()
 var tableClassA = newSingularInstructionTable(impl.LdIAddr)
@@ -31,6 +32,7 @@ func init() {
 var tableAll = map[decode.Class]instructionTable{
 	decode.Class0: tableClass0,
 	decode.Class1: tableClass1,
+	decode.Class2: tableClass2,
 	decode.Class6: tableClass6,
 	decode.Class8: tableClass8,
 	decode.ClassA: tableClassA,

@@ -3,15 +3,14 @@ package system
 import "github.com/AlanRostem/mu-8/mu8"
 
 const generalPurposeRegisterCount = 0x10
+const stackSize = 16
 
 type RegisterFile struct {
 	GeneralPurpose [generalPurposeRegisterCount]mu8.Byte
-	Index          mu8.DByte
 	ProgramCounter mu8.DByte
-	StackPointer   mu8.DByte
+	Index          mu8.DByte
 	DelayTimer     mu8.Byte
-	SoundTime      mu8.Byte
-	CurrentOperand mu8.DByte
+	SoundTimer     mu8.Byte
 }
 
 func newRegisterFile() *RegisterFile {

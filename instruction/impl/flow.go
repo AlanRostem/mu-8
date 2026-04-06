@@ -5,6 +5,12 @@ import (
 	"github.com/AlanRostem/mu-8/system"
 )
 
+func Call(args []mu8.DByte, sys *system.System) {
+	nnn := args[0]
+	sys.Stack.Push(sys.Registers.ProgramCounter)
+	sys.Registers.ProgramCounter = nnn
+}
+
 func Jp(args []mu8.DByte, sys *system.System) {
 	nnn := args[0]
 	sys.Registers.ProgramCounter = nnn
