@@ -20,7 +20,7 @@ func DrwVxVyN(args []mu8.DByte, sys *system.System) {
 	start := sys.Registers.Index
 	j := mu8.Byte(0)
 	for i := start; i < start+n; i++ {
-		addr := mu8.NewUint12(uint(i))
+		addr := mu8.NewUint12(int(i))
 		rowByte := sys.Memory.Read(addr)
 		row := rowByte.BoolArray()
 		for k := range row {

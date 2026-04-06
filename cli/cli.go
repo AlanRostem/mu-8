@@ -22,7 +22,7 @@ func Run() {
 	sys.Registers.GeneralPurpose[0x0] = 16
 	sys.Registers.GeneralPurpose[0x1] = 8
 	for i, row := range sprite {
-		addr := mu8.NewUint12(uint(i + sys.Registers.Index.Int()))
+		addr := mu8.NewUint12(i + sys.Registers.Index.Int())
 		sys.Memory.Write(addr, row)
 	}
 	exec.Exec(0x8170)

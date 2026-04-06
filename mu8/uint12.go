@@ -8,7 +8,10 @@ type Uint12 struct {
 	value uint16
 }
 
-func NewUint12(value uint) Uint12 {
+func NewUint12(value int) Uint12 {
+	if value < 0 {
+		panic("value cannot be negative")
+	}
 	return Uint12{
 		value: uint16(value % Uint12Max),
 	}
