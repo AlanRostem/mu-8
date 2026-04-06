@@ -8,7 +8,9 @@ import (
 var tableClass0 = newInstructionTable()
 var tableClass1 = newSingularInstructionTable(impl.Jp)
 var tableClass2 = newSingularInstructionTable(impl.Call)
+var tableClass5 = newInstructionTable()
 var tableClass6 = newSingularInstructionTable(impl.LdVxByte)
+var tableClass7 = newSingularInstructionTable(impl.AddVxByte)
 var tableClass8 = newInstructionTable()
 var tableClassA = newSingularInstructionTable(impl.LdIAddr)
 
@@ -19,6 +21,8 @@ var tableClassF = newInstructionTable()
 func init() {
 	tableClass0.Add(0x000, impl.Sys)
 	tableClass0.Add(0x0E0, impl.Cls)
+
+	tableClass5.Add(0x0, impl.SeVxVy)
 
 	tableClass8.Add(0x0, impl.LdVxVy)
 
@@ -33,7 +37,9 @@ var tableAll = map[decode.Class]instructionTable{
 	decode.Class0: tableClass0,
 	decode.Class1: tableClass1,
 	decode.Class2: tableClass2,
+	decode.Class5: tableClass5,
 	decode.Class6: tableClass6,
+	decode.Class7: tableClass7,
 	decode.Class8: tableClass8,
 	decode.ClassA: tableClassA,
 	decode.ClassD: tableClassD,

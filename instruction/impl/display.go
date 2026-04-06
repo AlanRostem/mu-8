@@ -1,6 +1,7 @@
 package impl
 
 import (
+	"github.com/AlanRostem/mu-8/logger"
 	"github.com/AlanRostem/mu-8/mu8"
 	"github.com/AlanRostem/mu-8/system"
 )
@@ -11,9 +12,11 @@ func Cls(args []mu8.DByte, sys *system.System) {
 			sys.FrameBuffer[y][x] = false
 		}
 	}
+	logger.Debugf("CLS")
 }
 
 func DrwVxVyN(args []mu8.DByte, sys *system.System) {
+	// TODO implement wrapping
 	x := args[0]
 	y := args[1]
 	n := args[2]
@@ -32,4 +35,5 @@ func DrwVxVyN(args []mu8.DByte, sys *system.System) {
 		}
 		j++
 	}
+	logger.Debugf("DRW V%X, V%X, %d", x, y, n)
 }

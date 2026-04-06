@@ -56,6 +56,7 @@ func (e *Executor) ExecProgram() {
 		addr.Add(1)
 		right := e.System.Memory.Read(addr)
 		opcode := left.Concat(right)
+		// TODO remove after prod
 		if opcode == OpcodeExit {
 			break
 		}

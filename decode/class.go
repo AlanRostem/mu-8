@@ -9,16 +9,16 @@ const (
 	Class3
 	Class4
 	Class5
-	Class6 // Contains LD
+	Class6
 	Class7
-	Class8 // Contains LD
+	Class8
 	Class9
-	ClassA // Contains LD
+	ClassA
 	ClassB
 	ClassC
 	ClassD
 	ClassE
-	ClassF // Contains LD
+	ClassF
 )
 
 type IdentitySize uint8

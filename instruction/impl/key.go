@@ -1,8 +1,7 @@
 package impl
 
 import (
-	"fmt"
-
+	"github.com/AlanRostem/mu-8/logger"
 	"github.com/AlanRostem/mu-8/mu8"
 	"github.com/AlanRostem/mu-8/system"
 )
@@ -10,11 +9,11 @@ import (
 func SkpVx(args []mu8.DByte, sys *system.System) {
 	x := args[0]
 	// TODO implement
-	fmt.Printf("SKP V%X\n", x)
+	logger.Debugf("SKP V%X", x)
 }
 
 func SknpVx(args []mu8.DByte, sys *system.System) {
 	x := args[0]
 	// TODO implement
-	fmt.Printf("SKNP V%X\n", x)
+	logger.Debugf("SKNP V%X", x)
 }
