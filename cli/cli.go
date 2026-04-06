@@ -1,7 +1,6 @@
 package cli
 
 import (
-	"github.com/AlanRostem/mu-8/display"
 	"github.com/AlanRostem/mu-8/instruction"
 	"github.com/AlanRostem/mu-8/mu8"
 	"github.com/AlanRostem/mu-8/system"
@@ -15,18 +14,18 @@ var sprite = []mu8.Byte{
 	0b00111100,
 }
 
+var program = [instruction.ProgramSize]mu8.Byte{
+	0x61,
+	0x11,
+	0xFF, // end of program here
+	0xFF, // end of program here
+}
+
 func Run() {
 	sys := system.New()
 	exec := instruction.NewExecutor(sys)
-	sys.Registers.Index = 100
-	sys.Registers.GeneralPurpose[0x0] = 16
-	sys.Registers.GeneralPurpose[0x1] = 8
-	for i, row := range sprite {
-		addr := mu8.NewUint12(i + sys.Registers.Index.Int())
-		sys.Memory.Write(addr, row)
-	}
-	exec.Exec(0x8170)
-	exec.Exec(0xD015)
-	w := display.NewWindow(sys)
-	w.Run()
+	exec.LoadProgram(program)
+	exec.ExecProgram()
+	// w := display.NewWindow(sys)
+	// w.Run()
 }
