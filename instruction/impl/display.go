@@ -1,18 +1,17 @@
 package impl
 
 import (
-	"github.com/AlanRostem/mu-8/logger"
 	"github.com/AlanRostem/mu-8/mu8"
 	"github.com/AlanRostem/mu-8/system"
 )
 
 func Cls(args []mu8.DByte, sys *system.System) {
+	pcDebugf(sys.Registers.ProgramCounter, "CLS")
 	for y := range system.DisplayHeight {
 		for x := range system.DisplayWidth {
 			sys.FrameBuffer[y][x] = false
 		}
 	}
-	logger.Debugf("CLS")
 }
 
 func DrwVxVyN(args []mu8.DByte, sys *system.System) {
@@ -20,6 +19,7 @@ func DrwVxVyN(args []mu8.DByte, sys *system.System) {
 	x := args[0]
 	y := args[1]
 	n := args[2]
+	pcDebugf(sys.Registers.ProgramCounter, "DRW V%X, V%X, %d", x, y, n)
 	start := sys.Registers.Index
 	j := mu8.Byte(0)
 	for i := start; i < start+n; i++ {
@@ -35,5 +35,4 @@ func DrwVxVyN(args []mu8.DByte, sys *system.System) {
 		}
 		j++
 	}
-	logger.Debugf("DRW V%X, V%X, %d", x, y, n)
 }
