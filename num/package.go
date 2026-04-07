@@ -1,5 +1,5 @@
 /*
-num is a package shared between all other packages in this repo.
-For instance, all type definitions reside in this package.
+num is a shared package containing all number definitions and some
+bit utilities.
 */
 package num
