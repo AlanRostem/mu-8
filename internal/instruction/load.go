@@ -1,8 +1,8 @@
-package impl
+package instruction
 
 import (
-	"github.com/AlanRostem/mu-8/num"
-	"github.com/AlanRostem/mu-8/system"
+	"github.com/AlanRostem/mu-8/internal/num"
+	"github.com/AlanRostem/mu-8/internal/system"
 )
 
 // LdVxByte executes opcode "8xy0", aka "LD Vx, Vy"

@@ -4,10 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/AlanRostem/mu-8/instruction"
-	"github.com/AlanRostem/mu-8/multimedia"
-	"github.com/AlanRostem/mu-8/num"
-	"github.com/AlanRostem/mu-8/system"
+	"github.com/AlanRostem/mu-8/internal/num"
+	"github.com/AlanRostem/mu-8/interpreter"
 )
 
 /*var sprite = []mu8.Byte{
@@ -18,7 +16,7 @@ import (
 	0b00111100,
 }*/
 
-/* var program = [instruction.ProgramSize]mu8.Byte{
+/* var forLoopProgram = [instruction.ProgramSize]mu8.Byte{
 	0x65, 0x00, // LD V5, 0
 	0x75, 0x01, // ADD V5, 1
 	0x35, 0x05, // SE V5, 2
@@ -27,7 +25,7 @@ import (
 }*/
 
 func Run() {
-	program := [instruction.ProgramSize]num.Byte{}
+	program := [interpreter.ProgramSize]num.Byte{}
 	const romPath = "roms/IBM Logo.ch8"
 	data, err := os.ReadFile(romPath)
 	if err != nil {
@@ -36,10 +34,9 @@ func Run() {
 	for i, b := range data {
 		program[i] = num.Byte(b)
 	}
-	sys := system.New()
-	exec := instruction.NewExecutor(sys)
-	exec.LoadProgram(program)
-	go exec.ExecProgram()
-	w := multimedia.NewWindow(sys)
-	w.Run()
+	in := interpreter.New()
+	in.Load(program)
+	in.Run()
+	// w := multimedia.NewWindow(sys)
+	// w.Run()
 }

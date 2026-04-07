@@ -1,6 +1,6 @@
 package decode
 
-import "github.com/AlanRostem/mu-8/num"
+import "github.com/AlanRostem/mu-8/internal/num"
 
 type Argument struct {
 	NibblePosition uint8

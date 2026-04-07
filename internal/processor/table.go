@@ -1,6 +1,6 @@
-package instruction
+package processor
 
-import "github.com/AlanRostem/mu-8/num"
+import "github.com/AlanRostem/mu-8/internal/num"
 
 const singleInstKey = 0xFF
 

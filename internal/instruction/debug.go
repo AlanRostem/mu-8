@@ -1,8 +1,8 @@
-package impl
+package instruction
 
 import (
-	"github.com/AlanRostem/mu-8/logger"
-	"github.com/AlanRostem/mu-8/num"
+	"github.com/AlanRostem/mu-8/internal/logger"
+	"github.com/AlanRostem/mu-8/internal/num"
 )
 
 func pcDebugf(pc num.DByte, format string, args ...any) {

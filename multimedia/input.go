@@ -1,7 +1,7 @@
 package multimedia
 
 import (
-	"github.com/AlanRostem/mu-8/system"
+	"github.com/AlanRostem/mu-8/internal/system"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )

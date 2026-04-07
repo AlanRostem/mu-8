@@ -1,6 +1,6 @@
 package system
 
-import "github.com/AlanRostem/mu-8/num"
+import "github.com/AlanRostem/mu-8/internal/num"
 
 const generalPurposeRegisterCount = 0x10
 const stackSize = 16

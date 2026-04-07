@@ -1,6 +1,6 @@
 package system
 
-import "github.com/AlanRostem/mu-8/num"
+import "github.com/AlanRostem/mu-8/internal/num"
 
 // Source: https://tobiasvl.github.io/blog/write-a-chip-8-emulator/
 var fontData = [0x10 * 0x5]num.Byte{

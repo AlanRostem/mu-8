@@ -1,6 +1,6 @@
 package system
 
-import "github.com/AlanRostem/mu-8/num"
+import "github.com/AlanRostem/mu-8/internal/num"
 
 type Stack struct {
 	pointer num.Byte
