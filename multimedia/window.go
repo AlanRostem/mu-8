@@ -1,19 +1,21 @@
-package display
+package multimedia
 
 import (
 	"image/color"
 	"log"
 
+	"github.com/AlanRostem/mu-8/keyboard"
 	"github.com/AlanRostem/mu-8/system"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type Window struct {
 	system *system.System
+	input  *UserInput // TODO remove this after testing
 }
 
 func NewWindow(system *system.System) *Window {
-	return &Window{system: system}
+	return &Window{system: system, input: NewUserInput(system)}
 }
 
 func (w *Window) Run() {
@@ -26,11 +28,18 @@ func (w *Window) Run() {
 }
 
 func (w *Window) Update() error {
+	w.input.Update()
 	return nil
 }
 
 func (w *Window) Draw(screen *ebiten.Image) {
 	screen.Fill(color.Black)
+	for i := range keyboard.KeyCount {
+		x := i % 4
+		y := i / 4
+		w.system.FrameBuffer[y][x] = w.input.Get(uint8(i))
+	}
+
 	for y := range system.DisplayHeight {
 		for x := range system.DisplayWidth {
 			c := color.Black

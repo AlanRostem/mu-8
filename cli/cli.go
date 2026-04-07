@@ -4,9 +4,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/AlanRostem/mu-8/display"
 	"github.com/AlanRostem/mu-8/instruction"
 	"github.com/AlanRostem/mu-8/mu8"
+	"github.com/AlanRostem/mu-8/multimedia"
 	"github.com/AlanRostem/mu-8/system"
 )
 
@@ -40,6 +40,6 @@ func Run() {
 	exec := instruction.NewExecutor(sys)
 	exec.LoadProgram(program)
 	go exec.ExecProgram()
-	w := display.NewWindow(sys)
+	w := multimedia.NewWindow(sys)
 	w.Run()
 }
