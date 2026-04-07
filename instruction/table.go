@@ -1,17 +1,17 @@
 package instruction
 
-import "github.com/AlanRostem/mu-8/mu8"
+import "github.com/AlanRostem/mu-8/num"
 
 const singleInstKey = 0xFF
 
-type instructionTable map[mu8.DByte]Instruction
+type instructionTable map[num.DByte]Instruction
 
 func newInstructionTable() instructionTable {
-	return make(map[mu8.DByte]Instruction)
+	return make(map[num.DByte]Instruction)
 }
 
 func newSingularInstructionTable(inst Instruction) instructionTable {
-	return map[mu8.DByte]Instruction{singleInstKey: inst}
+	return map[num.DByte]Instruction{singleInstKey: inst}
 }
 
 func (im instructionTable) IsSingle() bool {
@@ -26,14 +26,14 @@ func (im instructionTable) Single() Instruction {
 	return im[singleInstKey]
 }
 
-func (im instructionTable) Get(id mu8.DByte) Instruction {
+func (im instructionTable) Get(id num.DByte) Instruction {
 	if im.IsSingle() {
 		panic("cannot get multiple instructions for singular map")
 	}
 	return im[id]
 }
 
-func (im instructionTable) Add(id mu8.DByte, inst Instruction) {
+func (im instructionTable) Add(id num.DByte, inst Instruction) {
 	if im.IsSingle() {
 		panic("cannot add more than one instruction to a singular map")
 	}

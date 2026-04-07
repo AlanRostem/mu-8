@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/AlanRostem/mu-8/instruction"
-	"github.com/AlanRostem/mu-8/mu8"
 	"github.com/AlanRostem/mu-8/multimedia"
+	"github.com/AlanRostem/mu-8/num"
 	"github.com/AlanRostem/mu-8/system"
 )
 
@@ -27,14 +27,14 @@ import (
 }*/
 
 func Run() {
-	program := [instruction.ProgramSize]mu8.Byte{}
+	program := [instruction.ProgramSize]num.Byte{}
 	const romPath = "roms/IBM Logo.ch8"
 	data, err := os.ReadFile(romPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 	for i, b := range data {
-		program[i] = mu8.Byte(b)
+		program[i] = num.Byte(b)
 	}
 	sys := system.New()
 	exec := instruction.NewExecutor(sys)

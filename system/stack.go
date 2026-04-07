@@ -1,25 +1,25 @@
 package system
 
-import "github.com/AlanRostem/mu-8/mu8"
+import "github.com/AlanRostem/mu-8/num"
 
 type Stack struct {
-	pointer mu8.Byte
-	levels  [stackSize]mu8.DByte
+	pointer num.Byte
+	levels  [stackSize]num.DByte
 }
 
 func newStack() *Stack {
 	return &Stack{
 		pointer: 0,
-		levels:  [stackSize]mu8.DByte{},
+		levels:  [stackSize]num.DByte{},
 	}
 }
 
-func (s *Stack) Push(value mu8.DByte) {
+func (s *Stack) Push(value num.DByte) {
 	s.pointer++
 	s.levels[s.pointer] = value
 }
 
-func (s *Stack) Pop() mu8.DByte {
+func (s *Stack) Pop() num.DByte {
 	s.pointer--
 	return s.levels[s.pointer]
 }

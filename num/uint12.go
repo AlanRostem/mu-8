@@ -1,4 +1,4 @@
-package mu8
+package num
 
 import "fmt"
 

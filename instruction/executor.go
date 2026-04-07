@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/AlanRostem/mu-8/decode"
-	"github.com/AlanRostem/mu-8/mu8"
+	"github.com/AlanRostem/mu-8/num"
 	"github.com/AlanRostem/mu-8/system"
 )
 
@@ -14,7 +14,7 @@ const CpuFrequency = 500
 // OpcodeExit is a special opcode used by the Executor to
 // exit the program for testing purposes. This will be
 // removed in prod.
-const OpcodeExit = mu8.DByte(0xFFFF)
+const OpcodeExit = num.DByte(0xFFFF)
 
 type Executor struct {
 	System *system.System
@@ -26,7 +26,7 @@ func NewExecutor(system *system.System) *Executor {
 	}
 }
 
-func (e *Executor) ExecOpcode(opcode mu8.DByte) {
+func (e *Executor) ExecOpcode(opcode num.DByte) {
 	info := decode.Decode(opcode)
 	table := tableAll[info.Class]
 	if table.IsSingle() {
@@ -38,9 +38,9 @@ func (e *Executor) ExecOpcode(opcode mu8.DByte) {
 	inst(info.Args, e.System)
 }
 
-func (e *Executor) LoadProgram(program [ProgramSize]mu8.Byte) {
+func (e *Executor) LoadProgram(program [ProgramSize]num.Byte) {
 	for i, value := range program {
-		addr := mu8.NewUint12(system.ProgramOffset + i)
+		addr := num.NewUint12(system.ProgramOffset + i)
 		e.System.Memory.Write(addr, value)
 	}
 	e.System.Registers.Clear()
@@ -48,7 +48,7 @@ func (e *Executor) LoadProgram(program [ProgramSize]mu8.Byte) {
 
 func (e *Executor) ExecProgram() {
 	for {
-		addr := mu8.NewUint12(e.System.Registers.PC().Int())
+		addr := num.NewUint12(e.System.Registers.PC().Int())
 		opcode := e.System.Memory.FetchInstruction(addr)
 		// TODO remove after prod
 		if opcode == OpcodeExit {

@@ -1,4 +1,4 @@
-package mu8
+package num
 
 // Byte is an alias for uint8
 type Byte uint8

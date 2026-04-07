@@ -1,17 +1,17 @@
 package impl
 
 import (
-	"github.com/AlanRostem/mu-8/mu8"
+	"github.com/AlanRostem/mu-8/num"
 	"github.com/AlanRostem/mu-8/system"
 )
 
-func SkpVx(args []mu8.DByte, sys *system.System) {
+func SkpVx(args []num.DByte, sys *system.System) {
 	x := args[0]
 	pcDebugf(sys.Registers.PC(), "SKP V%X", x)
 	// TODO implement
 }
 
-func SknpVx(args []mu8.DByte, sys *system.System) {
+func SknpVx(args []num.DByte, sys *system.System) {
 	x := args[0]
 	pcDebugf(sys.Registers.PC(), "SKNP V%X", x)
 	// TODO implement
