@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/AlanRostem/mu-8/internal/num"
 	"github.com/AlanRostem/mu-8/interpreter"
 	"github.com/AlanRostem/mu-8/multimedia"
 )
@@ -26,17 +25,13 @@ import (
 }*/
 
 func Run() {
-	program := [interpreter.ProgramSize]num.Byte{}
 	const romPath = "programs/IBM Logo.ch8"
 	data, err := os.ReadFile(romPath)
 	if err != nil {
 		log.Fatal(err)
 	}
-	for i, b := range data {
-		program[i] = num.Byte(b)
-	}
 	in := interpreter.New()
-	in.Load(program)
+	in.Load(data)
 	go in.Run()
 	w := multimedia.NewWindow(in)
 	w.Run()

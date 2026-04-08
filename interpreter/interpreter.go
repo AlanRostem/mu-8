@@ -33,11 +33,14 @@ func (in *Interpreter) SetKey(key uint8, state bool) {
 	in.system.Keys[key] = state
 }
 
-func (in *Interpreter) Load(program [ProgramSize]num.Byte) {
+func (in *Interpreter) Load(program []byte) {
+	if len(program) > ProgramSize {
+		panic("program too large for chip8 memory space")
+	}
 	in.system.Registers.Clear()
 	for i, value := range program {
 		addr := num.NewUint12(system.ProgramOffset + i)
-		in.system.Memory.Write(addr, value)
+		in.system.Memory.Write(addr, num.Byte(value))
 	}
 }
 
