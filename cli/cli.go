@@ -1,9 +1,6 @@
 package cli
 
 import (
-	"log"
-	"os"
-
 	"github.com/AlanRostem/mu-8/interpreter"
 	"github.com/AlanRostem/mu-8/multimedia"
 )
@@ -24,14 +21,19 @@ import (
 	0xFF, 0xFF, // end of program here using custom opcode
 }*/
 
+var keyHaltProgram = [interpreter.ProgramSize]byte{
+	0xF5, 0x0A, // LD V5, K
+	0x12, 0x02, // JP 0x201
+}
+
 func Run() {
-	const romPath = "programs/IBM Logo.ch8"
-	data, err := os.ReadFile(romPath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// const romPath = "programs/IBM Logo.ch8"
+	// data, err := os.ReadFile(romPath)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 	in := interpreter.New()
-	in.Load(data)
+	in.Load(keyHaltProgram[:])
 	go in.Run()
 	w := multimedia.NewWindow(in)
 	w.Run()

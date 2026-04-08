@@ -9,13 +9,13 @@ func Call(args []num.DByte, sys *system.System) {
 	nnn := args[0]
 	pcDebugf(sys.Registers.PC(), "CALL 0x%03X", nnn)
 	sys.Stack.Push(sys.Registers.PC())
-	sys.Registers.SetPC(nnn)
+	sys.Registers.JumpPC(nnn)
 }
 
 func Jp(args []num.DByte, sys *system.System) {
 	nnn := args[0]
 	pcDebugf(sys.Registers.PC(), "JP 0x%03X", nnn)
-	sys.Registers.SetPC(nnn)
+	sys.Registers.JumpPC(nnn)
 }
 
 // 3xkk

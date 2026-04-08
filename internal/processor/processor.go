@@ -1,6 +1,8 @@
 package processor
 
 import (
+	"fmt"
+
 	"github.com/AlanRostem/mu-8/internal/decode"
 	"github.com/AlanRostem/mu-8/internal/num"
 	"github.com/AlanRostem/mu-8/internal/system"
@@ -18,7 +20,7 @@ func New(system *system.System) *Processor {
 	}
 }
 
-func (p *Processor) Execute(opcode num.DByte) {
+func (p *Processor) execute(opcode num.DByte) {
 	info := decode.Decode(opcode)
 	table := tableAll[info.Class]
 	if table.IsSingle() {
@@ -26,14 +28,17 @@ func (p *Processor) Execute(opcode num.DByte) {
 		return
 	}
 	identity := info.Idenitity
-	inst := table[identity]
+	inst, ok := table[identity]
+	if !ok {
+		panic(fmt.Errorf("instruction not found: class=0x%X, identity=0x%X", info.Class, identity))
+	}
 	inst(info.Args, p.System)
 }
 
 func (p *Processor) Cycle() {
 	addr := num.NewUint12(p.System.Registers.PC().Int())
 	opcode := p.System.Memory.FetchInstruction(addr)
-	p.Execute(opcode)
+	p.execute(opcode)
 	// increments it by 2 every cpu cycle
 	// if the above opcode modifies PC, it will offset it by -2
 	// and this line will accomodate for that

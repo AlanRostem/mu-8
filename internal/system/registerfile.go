@@ -28,10 +28,13 @@ func (rf *RegisterFile) Clear() {
 	rf.I = indexOffset
 }
 
-func (rf *RegisterFile) SetPC(value num.DByte) {
-	rf.pc = value - 2 // incremented next cpu cycle anyway, so this cancels out
+// JumpPC sets the program counter to the value minus two.
+// PC is incremented next cpu cycle anyway, so this cancels out.
+func (rf *RegisterFile) JumpPC(value num.DByte) {
+	rf.pc = value - 2
 }
 
+// IncrementPC increments the program counter by two
 func (rf *RegisterFile) IncrementPC() {
 	rf.pc += 2
 }

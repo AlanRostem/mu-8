@@ -11,11 +11,13 @@ import (
 
 type Window struct {
 	interpreter *interpreter.Interpreter
+	input       *UserInput
 }
 
 func NewWindow(interpreter *interpreter.Interpreter) *Window {
 	return &Window{
 		interpreter: interpreter,
+		input:       NewUserInput(interpreter),
 	}
 }
 
@@ -29,6 +31,7 @@ func (w *Window) Run() {
 }
 
 func (w *Window) Update() error {
+	w.input.Update()
 	return nil
 }
 
