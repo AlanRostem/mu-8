@@ -6,6 +6,7 @@ import (
 
 	"github.com/AlanRostem/mu-8/internal/num"
 	"github.com/AlanRostem/mu-8/interpreter"
+	"github.com/AlanRostem/mu-8/multimedia"
 )
 
 /*var sprite = []mu8.Byte{
@@ -26,7 +27,7 @@ import (
 
 func Run() {
 	program := [interpreter.ProgramSize]num.Byte{}
-	const romPath = "roms/IBM Logo.ch8"
+	const romPath = "programs/IBM Logo.ch8"
 	data, err := os.ReadFile(romPath)
 	if err != nil {
 		log.Fatal(err)
@@ -36,7 +37,7 @@ func Run() {
 	}
 	in := interpreter.New()
 	in.Load(program)
-	in.Run()
-	// w := multimedia.NewWindow(sys)
-	// w.Run()
+	go in.Run()
+	w := multimedia.NewWindow(in)
+	w.Run()
 }

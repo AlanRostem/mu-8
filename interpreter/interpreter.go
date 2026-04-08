@@ -9,6 +9,8 @@ import (
 )
 
 const ProgramSize = system.MemorySize - system.ProgramOffset
+const DisplayHeight = system.DisplayHeight
+const DisplayWidth = system.DisplayWidth
 
 type Interpreter struct {
 	system    *system.System
@@ -21,6 +23,10 @@ func New() *Interpreter {
 		system:    s,
 		processor: processor.New(s),
 	}
+}
+
+func (in *Interpreter) DisplayBuffer() [DisplayHeight][DisplayWidth]bool {
+	return in.system.FrameBuffer
 }
 
 func (in *Interpreter) SetKey(key uint8, state bool) {
