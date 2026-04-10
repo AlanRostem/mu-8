@@ -4,22 +4,36 @@ import (
 	"sync"
 	"time"
 
+	"github.com/AlanRostem/mu-8/internal/logger"
 	"github.com/AlanRostem/mu-8/internal/num"
 )
 
 type Timers struct {
-	delay num.Byte
-	sound num.Byte
+	delay   num.Byte
+	sound   num.Byte
+	running bool
 
-	mut sync.Mutex
+	mut sync.RWMutex
 }
 
 func newTimers() *Timers {
 	return &Timers{}
 }
 
+func (t *Timers) Stop() {
+	t.mut.Lock()
+	defer t.mut.Unlock()
+	t.running = false
+	logger.Debugf("Stopped timers.")
+}
+
 func (t *Timers) Run() {
-	for {
+	go t.RunBlocking()
+}
+
+func (t *Timers) RunBlocking() {
+	t.running = true
+	for t.running {
 		t.Update()
 		time.Sleep(time.Second / 60)
 	}
@@ -44,4 +58,16 @@ func (t *Timers) SetST(value num.Byte) {
 	t.mut.Lock()
 	defer t.mut.Unlock()
 	t.sound = value
+}
+
+func (t *Timers) DT() num.Byte {
+	t.mut.RLock()
+	defer t.mut.RUnlock()
+	return t.delay
+}
+
+func (t *Timers) ST() num.Byte {
+	t.mut.RLock()
+	defer t.mut.RUnlock()
+	return t.sound
 }

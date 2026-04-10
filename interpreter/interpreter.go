@@ -1,8 +1,10 @@
 package interpreter
 
 import (
+	"sync"
 	"time"
 
+	"github.com/AlanRostem/mu-8/internal/logger"
 	"github.com/AlanRostem/mu-8/internal/num"
 	"github.com/AlanRostem/mu-8/internal/processor"
 	"github.com/AlanRostem/mu-8/internal/system"
@@ -15,6 +17,10 @@ const DisplayWidth = system.DisplayWidth
 type Interpreter struct {
 	system    *system.System
 	processor *processor.Processor
+
+	running bool
+
+	mut sync.RWMutex
 }
 
 func New() *Interpreter {
@@ -26,14 +32,20 @@ func New() *Interpreter {
 }
 
 func (in *Interpreter) DisplayBuffer() [DisplayHeight][DisplayWidth]bool {
+	in.mut.RLock()
+	defer in.mut.RUnlock()
 	return in.system.FrameBuffer
 }
 
 func (in *Interpreter) SetKey(key uint8, state bool) {
+	in.mut.Lock()
+	defer in.mut.Unlock()
 	in.system.Keys[key] = state
 }
 
 func (in *Interpreter) Load(program []byte) {
+	in.mut.Lock()
+	defer in.mut.Unlock()
 	if len(program) > ProgramSize {
 		panic("program too large for chip8 memory space")
 	}
@@ -44,9 +56,23 @@ func (in *Interpreter) Load(program []byte) {
 	}
 }
 
-// Run starts the processor cycle "loop". This method is blocking
+func (in *Interpreter) Stop() {
+	in.mut.Lock()
+	defer in.mut.Unlock()
+	in.running = false
+	in.system.Timers.Stop()
+	logger.Debugf("Stopped interpreter.")
+}
+
 func (in *Interpreter) Run() {
-	for {
+	go in.RunBlocking()
+}
+
+// Run starts the processor cycle "loop". This method is blocking
+func (in *Interpreter) RunBlocking() {
+	in.system.Timers.Run()
+	in.running = true
+	for in.running {
 		in.processor.Cycle()
 		// simulate chip8 "clock speed"
 		time.Sleep(time.Second / processor.Frequency)

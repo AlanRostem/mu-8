@@ -34,7 +34,8 @@ func Run() {
 	// }
 	in := interpreter.New()
 	in.Load(keyHaltProgram[:])
-	go in.Run()
+	in.Run()
 	w := multimedia.NewWindow(in)
 	w.Run()
+	in.Stop()
 }
