@@ -30,6 +30,8 @@ func init() {
 
 	tableClassF.Add(0x07, instruction.LdVxDt)
 	tableClassF.Add(0x0A, instruction.LdVxK)
+	tableClassF.Add(0x15, instruction.LdDtVx)
+	tableClassF.Add(0x18, instruction.LdStVx)
 }
 
 // tableAll contains instruction maps mapped to a class number.

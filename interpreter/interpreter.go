@@ -61,7 +61,7 @@ func (in *Interpreter) Stop() {
 	defer in.mut.Unlock()
 	in.running = false
 	in.system.Timers.Stop()
-	logger.Debugf("Stopped interpreter.")
+	logger.Infof("Stopped interpreter.")
 }
 
 func (in *Interpreter) Run() {
@@ -78,7 +78,7 @@ func (in *Interpreter) RunBlocking() {
 		addr := num.NewUint12(in.system.Registers.PC().Int())
 		opcode := in.system.Memory.FetchInstruction(addr)
 		if opcode == 0xFFFF {
-			logger.Debugf("Interpreter terminated.")
+			logger.Infof("Interpreter terminated.")
 			in.running = false
 			break
 		}

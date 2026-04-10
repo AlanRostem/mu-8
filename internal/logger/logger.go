@@ -20,16 +20,13 @@ const (
 )
 
 var logFile = os.Stdout
-var logLevel = LevelDebug
+var logLevel = LevelInfo
 
 func SetFile(file *os.File) {
 	logFile = file
 }
 
 func logPrintf(levelLabel, levelColor, format string, args ...any) {
-	if logLevel > LevelInfo {
-		return
-	}
 	ts := time.Now().Format(time.RFC3339)
 	_, err := fmt.Fprintf(logFile, "%s %s[%s]%s\t", ts, levelColor, levelLabel, colorReset)
 	if err != nil {
@@ -42,9 +39,15 @@ func logPrintf(levelLabel, levelColor, format string, args ...any) {
 }
 
 func Debugf(format string, args ...any) {
+	if logLevel > LevelDebug {
+		return
+	}
 	logPrintf("DEBUG", colorGreen, format, args...)
 }
 
 func Infof(format string, args ...any) {
+	if logLevel > LevelInfo {
+		return
+	}
 	logPrintf("INFO", colorBlue, format, args...)
 }
