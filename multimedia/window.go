@@ -12,12 +12,14 @@ import (
 type Window struct {
 	interpreter *interpreter.Interpreter
 	input       *UserInput
+	sound       *SoundEngine
 }
 
 func NewWindow(interpreter *interpreter.Interpreter) *Window {
 	return &Window{
 		interpreter: interpreter,
 		input:       NewUserInput(interpreter),
+		sound:       NewSoundEngine(interpreter),
 	}
 }
 
@@ -32,6 +34,7 @@ func (w *Window) Run() {
 
 func (w *Window) Update() error {
 	w.input.Update()
+	w.sound.Update()
 	return nil
 }
 

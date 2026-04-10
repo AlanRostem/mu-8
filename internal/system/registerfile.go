@@ -9,10 +9,8 @@ const ProgramOffset = 0x200
 const indexOffset = 0x050
 
 type RegisterFile struct {
-	V  [generalPurposeRegisterCount]num.Byte
-	I  num.DByte
-	DT num.Byte
-	ST num.Byte
+	V [generalPurposeRegisterCount]num.Byte
+	I num.DByte
 
 	pc num.DByte
 }
