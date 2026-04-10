@@ -7,16 +7,18 @@ import (
 )
 
 const (
-	colorReset = "\033[0m"
-	// colorRed    = "\033[31m"
-	colorGreen = "\033[32m"
-	// colorYellow = "\033[33m"
-	colorBlue = "\033[34m"
+	colorReset  = "\033[0m"
+	colorRed    = "\033[31m"
+	colorGreen  = "\033[32m"
+	colorYellow = "\033[33m"
+	colorBlue   = "\033[34m"
 )
 
 const (
 	LevelDebug = iota
 	LevelInfo
+	LevelWarn
+	LevelError
 )
 
 var logFile = os.Stdout
@@ -50,4 +52,18 @@ func Infof(format string, args ...any) {
 		return
 	}
 	logPrintf("INFO", colorBlue, format, args...)
+}
+
+func Warnf(format string, args ...any) {
+	if logLevel > LevelWarn {
+		return
+	}
+	logPrintf("WARN", colorYellow, format, args...)
+}
+
+func Errorf(format string, args ...any) {
+	if logLevel > LevelError {
+		return
+	}
+	logPrintf("ERROR", colorRed, format, args...)
 }

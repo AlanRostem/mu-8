@@ -37,6 +37,12 @@ var delayTimerProgram = []byte{
 	0xFF, 0xFF, // 0x20A: EXIT (custom)
 }
 
+var soundTimerProgram = []byte{
+	0x65, 0xF0, // 0x200: LD V5, 240
+	0xF5, 0x18, // 0x202: LD ST, V5
+	0xFF, 0xFF, // 0x20A: EXIT (custom)
+}
+
 func Run() {
 	// const romPath = "programs/IBM Logo.ch8"
 	// data, err := os.ReadFile(romPath)
@@ -44,7 +50,7 @@ func Run() {
 	// 	log.Fatal(err)
 	// }
 	in := interpreter.New()
-	in.Load(delayTimerProgram)
+	in.Load(soundTimerProgram)
 	in.Run()
 	w := multimedia.NewWindow(in)
 	w.Run()

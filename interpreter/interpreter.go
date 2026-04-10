@@ -31,6 +31,10 @@ func New() *Interpreter {
 	}
 }
 
+func (in *Interpreter) SoundTimer() uint {
+	return uint(in.system.Timers.ST())
+}
+
 func (in *Interpreter) DisplayBuffer() [DisplayHeight][DisplayWidth]bool {
 	in.mut.RLock()
 	defer in.mut.RUnlock()
