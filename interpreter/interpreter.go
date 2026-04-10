@@ -74,6 +74,14 @@ func (in *Interpreter) RunBlocking() {
 	in.running = true
 	for in.running {
 		in.processor.Cycle()
+		// check for exit opcode when debugging
+		addr := num.NewUint12(in.system.Registers.PC().Int())
+		opcode := in.system.Memory.FetchInstruction(addr)
+		if opcode == 0xFFFF {
+			logger.Debugf("Interpreter terminated.")
+			in.running = false
+			break
+		}
 		// simulate chip8 "clock speed"
 		time.Sleep(time.Second / processor.Frequency)
 	}
