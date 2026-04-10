@@ -11,6 +11,7 @@ const (
 
 type System struct {
 	Registers          *RegisterFile
+	Timers             *Timers
 	Memory             *MemoryBank
 	Stack              *Stack
 	FrameBuffer        [DisplayHeight][DisplayWidth]bool
@@ -21,6 +22,7 @@ type System struct {
 func New() *System {
 	return &System{
 		Registers:          newRegisterFile(),
+		Timers:             newTimers(),
 		Memory:             newMemoryBank(),
 		Stack:              newStack(),
 		FrameBuffer:        [DisplayHeight][DisplayWidth]bool{},

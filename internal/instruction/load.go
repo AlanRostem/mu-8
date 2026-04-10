@@ -13,11 +13,11 @@ func LdVxVy(args []num.DByte, sys *system.System) {
 	sys.Registers.V[x] = sys.Registers.V[y]
 }
 
-// LdVxByte executes opcode "8xy0", aka "LD Vx, Vy"
+// LdVxByte executes opcode "Fx15", aka "LD DT, Vx"
 func LdVxDt(args []num.DByte, sys *system.System) {
 	x := args[0]
-	pcDebugf(sys.Registers.PC(), "LD V%X, DT", x)
-	sys.Registers.V[x] = sys.Registers.DT
+	pcDebugf(sys.Registers.PC(), "LD DT, V%X", x)
+	sys.Timers.SetDT(sys.Registers.V[x])
 }
 
 // LdVxByte executes opcode "6xkk", aka "LD Vx, byte"
