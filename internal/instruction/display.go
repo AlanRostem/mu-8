@@ -15,11 +15,11 @@ func Cls(args []num.DByte, sys *system.System) {
 }
 
 func DrwVxVyN(args []num.DByte, sys *system.System) {
-	// TODO implement wrapping
 	x := args[0]
 	y := args[1]
 	n := args[2]
 	pcDebugf(sys.Registers.PC(), "DRW V%X, V%X, %d", x, y, n)
+	sys.Registers.V[0xF] = 0
 	start := sys.Registers.I
 	j := num.Byte(0)
 	for i := start; i < start+n; i++ {
@@ -32,6 +32,9 @@ func DrwVxVyN(args []num.DByte, sys *system.System) {
 			cx %= system.DisplayWidth
 			cy %= system.DisplayHeight
 			current := sys.FrameBuffer[cy][cx]
+			if current == row[k] {
+				sys.Registers.V[0xF] = 1
+			}
 			newVal := num.BoolXor(current, row[k])
 			sys.FrameBuffer[cy][cx] = newVal
 		}

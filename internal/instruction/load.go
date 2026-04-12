@@ -40,11 +40,11 @@ func LdFVx(args []num.DByte, sys *system.System) {
 func LdBVx(args []num.DByte, sys *system.System) {
 	x := args[0]
 	pcDebugf(sys.Registers.PC(), "LD B, V%X", x)
-	addr := num.NewUint12(sys.Registers.I.Int())
 	vx := sys.Registers.V[x]
 	hundred := vx / 100
 	ten := (vx / 10) % 10
 	one := vx % 10
+	addr := num.NewUint12(sys.Registers.I.Int())
 	sys.Memory.Write(addr, hundred)
 	addr.Add(1)
 	sys.Memory.Write(addr, ten)

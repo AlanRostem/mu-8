@@ -61,14 +61,10 @@ type SoundEngine struct {
 
 func NewSoundEngine(interpreter *interpreter.Interpreter) *SoundEngine {
 	audioContext := audio.NewContext(sampleRate)
-	player, err := audioContext.NewPlayerF32(&stream{})
-	if err != nil {
-		panic(err)
-	}
 	return &SoundEngine{
 		interpreter:  interpreter,
 		audioContext: audioContext,
-		player:       player,
+		player:       nil,
 	}
 }
 
@@ -76,6 +72,11 @@ func (s *SoundEngine) Update() {
 	if s.interpreter.SoundTimer() > 0 {
 		if !s.isPlaying {
 			s.isPlaying = true
+			player, err := s.audioContext.NewPlayerF32(&stream{})
+			if err != nil {
+				panic(err)
+			}
+			s.player = player
 			s.player.Play()
 		}
 	} else if s.isPlaying {
