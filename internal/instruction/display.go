@@ -29,6 +29,8 @@ func DrwVxVyN(args []num.DByte, sys *system.System) {
 		for k := range row {
 			cx := sys.Registers.V[x] + num.Byte(k)
 			cy := sys.Registers.V[y] + j
+			cx %= system.DisplayWidth
+			cy %= system.DisplayHeight
 			current := sys.FrameBuffer[cy][cx]
 			newVal := num.BoolXor(current, row[k])
 			sys.FrameBuffer[cy][cx] = newVal

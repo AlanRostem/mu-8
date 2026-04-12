@@ -20,6 +20,6 @@ func (s *Stack) Push(value num.DByte) {
 }
 
 func (s *Stack) Pop() num.DByte {
-	s.pointer--
+	defer func() { s.pointer-- }()
 	return s.levels[s.pointer]
 }

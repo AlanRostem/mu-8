@@ -29,11 +29,28 @@ func LdIAddr(args []num.DByte, sys *system.System) {
 }
 
 func LdFVx(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	pcDebugf(sys.Registers.PC(), "LD F, V%X", x)
+	const fontStart = 0x50
+	const fontSpriteHeight = 5
+	digit := sys.Registers.V[x]
+	sys.Registers.I = fontStart + num.DByte(digit)*fontSpriteHeight
 }
 
 func LdBVx(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	pcDebugf(sys.Registers.PC(), "LD B, V%X", x)
+	addr := num.NewUint12(sys.Registers.I.Int())
+	vx := sys.Registers.V[x]
+	hundred := vx / 100
+	ten := (vx / 10) % 10
+	one := vx % 10
+	sys.Memory.Write(addr, hundred)
+	addr.Add(1)
+	sys.Memory.Write(addr, ten)
+	addr.Add(1)
+	sys.Memory.Write(addr, one)
+
 }
 
 func LdIVx(args []num.DByte, sys *system.System) {
@@ -41,5 +58,12 @@ func LdIVx(args []num.DByte, sys *system.System) {
 }
 
 func LdVxI(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	pcDebugf(sys.Registers.PC(), "LD V%X, I", x)
+	start := sys.Registers.I.Int()
+	for i := range x {
+		addr := num.NewUint12(start + i.Int())
+		sys.Registers.V[i] = sys.Memory.Read(addr)
+	}
+	sys.Registers.I += x + 1
 }

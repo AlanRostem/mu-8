@@ -8,12 +8,14 @@ import (
 func CallAddr(args []num.DByte, sys *system.System) {
 	nnn := args[0]
 	pcDebugf(sys.Registers.PC(), "CALL 0x%03X", nnn)
-	sys.Stack.Push(sys.Registers.PC())
+	sys.Stack.Push(sys.Registers.PC() + 2)
 	sys.Registers.JumpPC(nnn)
 }
 
 func Ret(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	addr := sys.Stack.Pop()
+	pcDebugf(sys.Registers.PC(), "RET 0x%03X", addr)
+	sys.Registers.JumpPC(addr)
 }
 
 func JpAddr(args []num.DByte, sys *system.System) {

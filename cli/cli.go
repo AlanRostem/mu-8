@@ -1,6 +1,9 @@
 package cli
 
 import (
+	"log"
+	"os"
+
 	"github.com/AlanRostem/mu-8/interpreter"
 	"github.com/AlanRostem/mu-8/multimedia"
 )
@@ -45,12 +48,13 @@ var soundTimerProgram = []byte{
 
 func Run() {
 	// const romPath = "programs/IBM Logo.ch8"
-	// data, err := os.ReadFile(romPath)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	const romPath = "programs/Breakout (Brix hack) [David Winter, 1997].ch8"
+	data, err := os.ReadFile(romPath)
+	if err != nil {
+		log.Fatal(err)
+	}
 	in := interpreter.New()
-	in.Load(soundTimerProgram)
+	in.Load(data)
 	in.Run()
 	w := multimedia.NewWindow(in)
 	w.Run()

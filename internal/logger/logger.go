@@ -22,7 +22,7 @@ const (
 )
 
 var logFile = os.Stdout
-var logLevel = LevelInfo
+var logLevel = LevelDebug
 
 func SetFile(file *os.File) {
 	logFile = file
