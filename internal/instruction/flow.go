@@ -52,9 +52,19 @@ func SneVxByte(args []num.DByte, sys *system.System) {
 }
 
 func SeVxVy(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	y := args[1]
+	pcDebugf(sys.Registers.PC(), "SE V%X, V%X", x, y)
+	if sys.Registers.V[x] == sys.Registers.V[y] {
+		sys.Registers.IncrementPC()
+	}
 }
 
 func SneVxVy(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	y := args[1]
+	pcDebugf(sys.Registers.PC(), "SNE V%X, V%X", x, y)
+	if sys.Registers.V[x] != sys.Registers.V[y] {
+		sys.Registers.IncrementPC()
+	}
 }
