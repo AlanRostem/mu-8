@@ -5,17 +5,24 @@ import (
 	"github.com/AlanRostem/mu-8/internal/system"
 )
 
-func Call(args []num.DByte, sys *system.System) {
+func CallAddr(args []num.DByte, sys *system.System) {
 	nnn := args[0]
 	pcDebugf(sys.Registers.PC(), "CALL 0x%03X", nnn)
 	sys.Stack.Push(sys.Registers.PC())
 	sys.Registers.JumpPC(nnn)
 }
 
-func Jp(args []num.DByte, sys *system.System) {
+func JpAddr(args []num.DByte, sys *system.System) {
 	nnn := args[0]
 	pcDebugf(sys.Registers.PC(), "JP 0x%03X", nnn)
 	sys.Registers.JumpPC(nnn)
+}
+
+func JpV0Addr(args []num.DByte, sys *system.System) {
+	nnn := args[0]
+	pcDebugf(sys.Registers.PC(), "JP V0, 0x%03X", nnn)
+	v0 := sys.Registers.V[0]
+	sys.Registers.JumpPC(num.DByte(v0) + nnn)
 }
 
 // 3xkk
@@ -38,4 +45,12 @@ func SneVxByte(args []num.DByte, sys *system.System) {
 	if num.DByte(vx) != kk {
 		sys.Registers.IncrementPC()
 	}
+}
+
+func SeVxVy(args []num.DByte, sys *system.System) {
+	panic("not implemented")
+}
+
+func SneVxVy(args []num.DByte, sys *system.System) {
+	panic("not implemented")
 }

@@ -27,3 +27,19 @@ func LdIAddr(args []num.DByte, sys *system.System) {
 	pcDebugf(sys.Registers.PC(), "LD I, 0x%03X", addr)
 	sys.Registers.I = addr
 }
+
+func LdFVx(args []num.DByte, sys *system.System) {
+	panic("not implemented")
+}
+
+func LdBVx(args []num.DByte, sys *system.System) {
+	panic("not implemented")
+}
+
+func LdIVx(args []num.DByte, sys *system.System) {
+	panic("not implemented")
+}
+
+func LdVxI(args []num.DByte, sys *system.System) {
+	panic("not implemented")
+}
