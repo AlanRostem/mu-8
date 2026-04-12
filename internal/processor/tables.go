@@ -25,6 +25,7 @@ var tableClassF = newInstructionTable()
 func init() {
 	tableClass0.Add(0x000, instruction.Sys)
 	tableClass0.Add(0x0E0, instruction.Cls)
+	tableClass0.Add(0x0EE, instruction.Ret)
 
 	tableClass8.Add(0x0, instruction.LdVxVy)
 	tableClass8.Add(0x1, instruction.OrVxVy)

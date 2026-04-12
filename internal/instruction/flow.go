@@ -12,6 +12,10 @@ func CallAddr(args []num.DByte, sys *system.System) {
 	sys.Registers.JumpPC(nnn)
 }
 
+func Ret(args []num.DByte, sys *system.System) {
+	panic("not implemented")
+}
+
 func JpAddr(args []num.DByte, sys *system.System) {
 	nnn := args[0]
 	pcDebugf(sys.Registers.PC(), "JP 0x%03X", nnn)
