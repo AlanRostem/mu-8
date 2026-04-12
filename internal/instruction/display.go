@@ -32,7 +32,7 @@ func DrwVxVyN(args []num.DByte, sys *system.System) {
 			cx %= system.DisplayWidth
 			cy %= system.DisplayHeight
 			current := sys.FrameBuffer[cy][cx]
-			if current == row[k] {
+			if current && row[k] {
 				sys.Registers.V[0xF] = 1
 			}
 			newVal := num.BoolXor(current, row[k])

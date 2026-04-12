@@ -31,7 +31,6 @@ func JpV0Addr(args []num.DByte, sys *system.System) {
 	sys.Registers.JumpPC(num.DByte(v0) + nnn)
 }
 
-// 3xkk
 func SeVxByte(args []num.DByte, sys *system.System) {
 	x := args[0]
 	kk := args[1]
@@ -42,7 +41,6 @@ func SeVxByte(args []num.DByte, sys *system.System) {
 	}
 }
 
-// 3xkk
 func SneVxByte(args []num.DByte, sys *system.System) {
 	x := args[0]
 	kk := args[1]
