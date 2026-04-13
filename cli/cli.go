@@ -47,6 +47,7 @@ var soundTimerProgram = []byte{
 }
 
 func Run() {
+	// const romPath = "programs/2-ibm-logo.ch8"
 	const romPath = "programs/3-corax+.ch8"
 	// const romPath = "programs/4-flags.ch8"
 	// const romPath = "programs/Breakout (Brix hack) [David Winter, 1997].ch8"

@@ -57,7 +57,7 @@ func LdIVx(args []num.DByte, sys *system.System) {
 	x := args[0]
 	pcDebugf(sys.Registers.PC(), "LD I, V%X", x)
 	start := sys.Registers.I.Int()
-	for i := range x {
+	for i := range x + 1 {
 		addr := num.NewUint12(start + i.Int())
 		sys.Memory.Write(addr, sys.Registers.V[i])
 	}
@@ -68,7 +68,7 @@ func LdVxI(args []num.DByte, sys *system.System) {
 	x := args[0]
 	pcDebugf(sys.Registers.PC(), "LD V%X, I", x)
 	start := sys.Registers.I.Int()
-	for i := range x {
+	for i := range x + 1 {
 		addr := num.NewUint12(start + i.Int())
 		sys.Registers.V[i] = sys.Memory.Read(addr)
 	}
