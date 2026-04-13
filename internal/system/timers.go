@@ -24,7 +24,7 @@ func (t *Timers) Stop() {
 	t.mut.Lock()
 	defer t.mut.Unlock()
 	t.running = false
-	logger.Infof("Stopped timers.")
+	logger.Debugf("Stopped timers.")
 }
 
 func (t *Timers) Run() {

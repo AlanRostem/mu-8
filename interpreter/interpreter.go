@@ -25,12 +25,16 @@ type Interpreter struct {
 	clockSpeedHz int
 }
 
-func New(conifg Config) *Interpreter {
+func New(config Config) *Interpreter {
 	s := system.New()
+	logger.SetLevel(config.LogLevel)
+	if config.LogFile != "" {
+		logger.SetFile(config.LogFile)
+	}
 	return &Interpreter{
 		system:       s,
 		processor:    processor.New(s),
-		clockSpeedHz: conifg.ClockSpeedHz,
+		clockSpeedHz: config.ClockSpeedHz,
 	}
 }
 

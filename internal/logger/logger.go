@@ -24,8 +24,12 @@ const (
 var logFile = os.Stdout
 var logLevel = LevelDebug
 
-func SetFile(file *os.File) {
-	logFile = file
+func SetFile(path string) {
+	// TODO implement
+}
+
+func SetLevel(level int) {
+	logLevel = level
 }
 
 func logPrintf(levelLabel, levelColor, format string, args ...any) {
