@@ -3,7 +3,6 @@ package instruction
 import (
 	"math/rand/v2"
 
-	"github.com/AlanRostem/mu-8/internal/logger"
 	"github.com/AlanRostem/mu-8/internal/num"
 	"github.com/AlanRostem/mu-8/internal/system"
 )
@@ -59,39 +58,34 @@ func AddVxVy(args []num.DByte, sys *system.System) {
 	sys.Registers.V[x] = num.Byte(result)
 }
 
-func SubVxVy(args []num.DByte, sys *system.System) {
-	x := args[0]
-	y := args[1]
-	pcDebugf(sys.Registers.PC(), "SUB, V%X, V%X", x, y)
-	result := int16(sys.Registers.V[x]) - int16(sys.Registers.V[y])
-	if result < 0 {
-		result += 0xFF
-		sys.Registers.V[0xF] = 0
-	} else {
-		sys.Registers.V[0xF] = 1
-	}
-	sys.Registers.V[x] = num.Byte(result)
-}
-
 func AddIVx(args []num.DByte, sys *system.System) {
 	x := args[0]
 	pcDebugf(sys.Registers.PC(), "ADD, I, V%X", x)
 	sys.Registers.I += num.DByte(sys.Registers.V[x])
 }
 
+func SubVxVy(args []num.DByte, sys *system.System) {
+	x := args[0]
+	y := args[1]
+	pcDebugf(sys.Registers.PC(), "SUB, V%X, V%X", x, y)
+	if int16(sys.Registers.V[x]) < int16(sys.Registers.V[y]) {
+		sys.Registers.V[0xF] = 1
+	} else {
+		sys.Registers.V[0xF] = 0
+	}
+	sys.Registers.V[x] -= sys.Registers.V[y]
+}
+
 func SubnVxVy(args []num.DByte, sys *system.System) {
 	x := args[0]
 	y := args[1]
 	pcDebugf(sys.Registers.PC(), "SUB, V%X, V%X", x, y)
-	result := int16(sys.Registers.V[y]) - int16(sys.Registers.V[x])
-	logger.Debugf("here")
-	if result < 0 {
-		result += 0xFF
-		sys.Registers.V[0xF] = 0
-	} else {
+	if int16(sys.Registers.V[y]) < int16(sys.Registers.V[x]) {
 		sys.Registers.V[0xF] = 1
+	} else {
+		sys.Registers.V[0xF] = 0
 	}
-	sys.Registers.V[x] = num.Byte(result)
+	sys.Registers.V[x] = sys.Registers.V[y] - sys.Registers.V[x]
 }
 
 func ShrVxVy(args []num.DByte, sys *system.System) {

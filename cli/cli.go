@@ -48,7 +48,7 @@ var soundTimerProgram = []byte{
 
 func Run() {
 	// const romPath = "programs/IBM Logo.ch8"
-	const romPath = "programs/test_opcode.ch8"
+	const romPath = "programs/3-corax+.ch8"
 	data, err := os.ReadFile(romPath)
 	if err != nil {
 		log.Fatal(err)

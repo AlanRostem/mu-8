@@ -7,5 +7,5 @@ import (
 
 func pcDebugf(pc num.DByte, format string, args ...any) {
 	args = append([]any{pc}, args...)
-	logger.Debugf("0x%04X: "+format, args...)
+	logger.Debugf("0x%03X: "+format, args...)
 }

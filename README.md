@@ -10,4 +10,4 @@ This document is also very useful: https://www.cs.columbia.edu/~sedwards/classes
 
 Useful roms in this repo and some code: https://github.com/dmatlack/chip8
 
-This rom is used for testing here: https://github.com/corax89/chip8-test-rom/
+Test suite used: https://github.com/Timendus/chip8-test-suite.git
