@@ -8,8 +8,6 @@ import (
 	"github.com/AlanRostem/mu-8/internal/system"
 )
 
-const Frequency = 500
-
 type Processor struct {
 	System *system.System
 }

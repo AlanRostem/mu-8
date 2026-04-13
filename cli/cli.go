@@ -22,7 +22,7 @@ import (
 	0x35, 0x05, // 0x204: SE V5, 5
 	0x12, 0x00, // 0x206: JP 0x200
 	0xFF, 0xFF, // 0x208: EXIT (custom)
-}*/
+}
 
 var keySkipProgram = []byte{
 	0x65, 0x00, // 0x200: LD V5, 0
@@ -44,18 +44,18 @@ var soundTimerProgram = []byte{
 	0x65, 0x40, // 0x200: LD V5, 64
 	0xF5, 0x18, // 0x202: LD ST, V5
 	0xFF, 0xFF, // 0x20A: EXIT (custom)
-}
+}*/
 
 func Run() {
-	// const romPath = "programs/2-ibm-logo.ch8"
-	const romPath = "programs/3-corax+.ch8"
-	// const romPath = "programs/4-flags.ch8"
-	// const romPath = "programs/Breakout (Brix hack) [David Winter, 1997].ch8"
+	if len(os.Args) != 2 {
+		log.Fatal("please specify a program path")
+	}
+	romPath := os.Args[1]
 	data, err := os.ReadFile(romPath)
 	if err != nil {
 		log.Fatal(err)
 	}
-	in := interpreter.New()
+	in := interpreter.New(interpreter.NewDefaultConfig())
 	in.Load(data)
 	in.Run()
 	w := multimedia.NewWindow(in)

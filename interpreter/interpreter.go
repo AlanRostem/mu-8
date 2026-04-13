@@ -21,13 +21,16 @@ type Interpreter struct {
 	running bool
 
 	mut sync.RWMutex
+
+	clockSpeedHz int
 }
 
-func New() *Interpreter {
+func New(conifg Config) *Interpreter {
 	s := system.New()
 	return &Interpreter{
-		system:    s,
-		processor: processor.New(s),
+		system:       s,
+		processor:    processor.New(s),
+		clockSpeedHz: conifg.ClockSpeedHz,
 	}
 }
 
@@ -87,6 +90,6 @@ func (in *Interpreter) RunBlocking() {
 			break
 		}
 		// simulate chip8 "clock speed"
-		time.Sleep(time.Second / processor.Frequency)
+		time.Sleep(time.Second / time.Duration(in.clockSpeedHz))
 	}
 }
