@@ -54,7 +54,14 @@ func LdBVx(args []num.DByte, sys *system.System) {
 }
 
 func LdIVx(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	pcDebugf(sys.Registers.PC(), "LD I, V%X", x)
+	start := sys.Registers.I.Int()
+	for i := range x {
+		addr := num.NewUint12(start + i.Int())
+		sys.Memory.Write(addr, sys.Registers.V[i])
+	}
+	sys.Registers.I += x + 1
 }
 
 func LdVxI(args []num.DByte, sys *system.System) {

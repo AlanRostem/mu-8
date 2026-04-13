@@ -3,6 +3,7 @@ package instruction
 import (
 	"math/rand/v2"
 
+	"github.com/AlanRostem/mu-8/internal/logger"
 	"github.com/AlanRostem/mu-8/internal/num"
 	"github.com/AlanRostem/mu-8/internal/system"
 )
@@ -72,18 +73,39 @@ func SubVxVy(args []num.DByte, sys *system.System) {
 	sys.Registers.V[x] = num.Byte(result)
 }
 
-func ShrVxVy(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+func AddIVx(args []num.DByte, sys *system.System) {
+	x := args[0]
+	pcDebugf(sys.Registers.PC(), "ADD, I, V%X", x)
+	sys.Registers.I += num.DByte(sys.Registers.V[x])
 }
 
 func SubnVxVy(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	y := args[1]
+	pcDebugf(sys.Registers.PC(), "SUB, V%X, V%X", x, y)
+	result := int16(sys.Registers.V[y]) - int16(sys.Registers.V[x])
+	logger.Debugf("here")
+	if result < 0 {
+		result += 0xFF
+		sys.Registers.V[0xF] = 0
+	} else {
+		sys.Registers.V[0xF] = 1
+	}
+	sys.Registers.V[x] = num.Byte(result)
+}
+
+func ShrVxVy(args []num.DByte, sys *system.System) {
+	x := args[0]
+	y := args[1]
+	pcDebugf(sys.Registers.PC(), "SHR V%X, V%X", x, y)
+	sys.Registers.V[x] >>= 1
+	sys.Registers.V[0xF] = sys.Registers.V[x] & 0b10000000
 }
 
 func ShlVxVy(args []num.DByte, sys *system.System) {
-	panic("not implemented")
-}
-
-func AddIVx(args []num.DByte, sys *system.System) {
-	panic("not implemented")
+	x := args[0]
+	y := args[1]
+	pcDebugf(sys.Registers.PC(), "SHL V%X, V%X", x, y)
+	sys.Registers.V[x] <<= 1
+	sys.Registers.V[0xF] = sys.Registers.V[x] & 0b00000001
 }
