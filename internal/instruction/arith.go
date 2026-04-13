@@ -68,7 +68,7 @@ func SubVxVy(args []num.DByte, sys *system.System) {
 	x := args[0]
 	y := args[1]
 	pcDebugf(sys.Registers.PC(), "SUB, V%X, V%X", x, y)
-	if int16(sys.Registers.V[x]) < int16(sys.Registers.V[y]) {
+	if int16(sys.Registers.V[x]) >= int16(sys.Registers.V[y]) {
 		sys.Registers.V[0xF] = 1
 	} else {
 		sys.Registers.V[0xF] = 0
@@ -80,7 +80,7 @@ func SubnVxVy(args []num.DByte, sys *system.System) {
 	x := args[0]
 	y := args[1]
 	pcDebugf(sys.Registers.PC(), "SUB, V%X, V%X", x, y)
-	if int16(sys.Registers.V[y]) < int16(sys.Registers.V[x]) {
+	if int16(sys.Registers.V[y]) >= int16(sys.Registers.V[x]) {
 		sys.Registers.V[0xF] = 1
 	} else {
 		sys.Registers.V[0xF] = 0

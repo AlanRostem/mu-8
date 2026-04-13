@@ -1,6 +1,10 @@
 package num
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/AlanRostem/mu-8/internal/logger"
+)
 
 const Uint12Max = 0x1000
 
@@ -12,6 +16,9 @@ func NewUint12(value int) Uint12 {
 	if value < 0 {
 		panic("value cannot be negative")
 	}
+	if value >= Uint12Max {
+		logger.Warnf("Uint12 overflow")
+	}
 	return Uint12{
 		value: uint16(value % Uint12Max),
 	}
@@ -19,6 +26,9 @@ func NewUint12(value int) Uint12 {
 
 func (u *Uint12) Add(value uint) {
 	var temp = uint(u.value) + value
+	if temp >= Uint12Max {
+		logger.Warnf("Uint12 overflow")
+	}
 	u.value = uint16(temp % Uint12Max)
 }
 
@@ -27,6 +37,9 @@ func (u *Uint12) Value() uint {
 }
 
 func (u *Uint12) Set(value uint) {
+	if value >= Uint12Max {
+		logger.Warnf("Uint12 overflow")
+	}
 	u.value = uint16(value % Uint12Max)
 }
 
